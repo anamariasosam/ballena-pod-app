@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { View } from 'react-native';
-import {
-  Card,
-  Text,
-  Image
-} from 'react-native-elements';
+import { Image } from 'react-native';
+import { Container, Header, Content, Card, CardItem, Title, Thumbnail, Text, Icon, Left, Body, Right, Subtitle, H3 } from 'native-base';
 
 export default class App extends Component {
   state = {
@@ -22,20 +18,46 @@ export default class App extends Component {
   render() {
     const {members} = this.state;
     return (
-      <View>
-        <Text>Ballena Pod 4dffgg3</Text>
-        { 
-          members.map(member => 
-            <Card>
-            <Card.Title>{member.name}</Card.Title>
-            <Card.Divider/>
-            <Image source={{ uri: member.avatar }} />
-    
-          
-          </Card>
-          )
-        }
-      </View>
+      <Container>
+        <Header>
+          <Left/>
+          <Body>
+            <Title>Ballena Pod</Title>
+            <Subtitle>Members</Subtitle>
+          </Body>
+          <Right />
+        </Header>
+        <Content>
+          { 
+            members.map(member => 
+              <Card key={member.name}>
+                <CardItem>
+                  <Left>
+                    <Thumbnail source={{uri: member.corporate_value.avatar}} />
+                    <Body>
+                      <H3>{member.corporate_value.name}</H3>
+                    </Body>
+                  </Left>
+                </CardItem>
+                <CardItem cardBody>
+                  <Image source={{uri: member.avatar}} style={{height: 200, width: null, flex: 1}}/>
+                </CardItem>
+                <CardItem>
+                  <Left>
+                    <Icon style={{fontSize: 20, color: 'brown'}} ios='birthday-cake' android="birthday-cake" type="FontAwesome5" />
+                    <Text>{member.date_of_birth}</Text>
+                  </Left>
+                  <Body>
+                  </Body>
+                  <Right>
+                    <H3 style={{color: '#357EDD'}}>{member.role}</H3>
+                  </Right>
+                </CardItem>
+              </Card>
+            )
+          }
+        </Content>
+      </Container>
     );
   }
 }
